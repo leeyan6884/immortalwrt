@@ -1,0 +1,63 @@
+name: Build ImmortalWRT
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential libncurses5-dev zlib1g-dev gawk flex git gettext wget unzip python3-distutils
+
+      - name: Setup ImmortalWRT build environment
+        run: |
+          git clone https://github.com/immortalwrt/immortalwrt.git
+          cd immortalwrt
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+
+      - name: Configure ImmortalWRT build settings
+        run: |
+          cd immortalwrt
+          # Set your configuration options
+          echo "CONFIG_TARGET_KERNEL_PARTSIZE=512m" >> .config
+          echo "CONFIG_TARGET_ROOTFS_PARTSIZE=2048m" >> .config
+          echo "CONFIG_PACKAGE_nftables=y" >> .config
+          echo "CONFIG_PACKAGE_ddnsto=y" >> .config
+          echo "CONFIG_PACKAGE_mosdos=y" >> .config
+          echo "CONFIG_PACKAGE_homeproxy=y" >> .config
+          echo "CONFIG_PACKAGE_mihomo=y" >> .config
+          echo "CONFIG_PACKAGE_openclash=y" >> .config
+          echo "CONFIG_PACKAGE_passwsll=y" >> .config
+          echo "CONFIG_PACKAGE_kms-server=y" >> .config
+          make menuconfig # Optional: This step can be skipped if using the .config file directly
+
+      - name: Build ImmortalWRT
+        run: |
+          cd immortalwrt
+          make -j$(nproc)
+
+
+name: Build ImmortalWRT
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # 允许手动触发构建
+    inputs:
+      example_input:
+        description: 'Example input for your workflow'
+        required: false
+        default: 'default value'

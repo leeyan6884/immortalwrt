@@ -40,9 +40,10 @@ jobs:
         make -j$(nproc) download V=s || true
         make -j$(nproc) V=s
 
-    - name: Upload firmware
-      uses: actions/upload-artifact@v3
-      with:
-        name: ImmortalWrt-firmware
-        path: openwrt/bin/targets/
+  - name: Upload firmware
+  uses: actions/upload-artifact@v4
+  with:
+    name: ImmortalWrt-firmware
+    path: openwrt/bin/targets/
+   
 

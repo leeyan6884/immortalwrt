@@ -57,7 +57,7 @@ jobs:
     - name: 🔧 Load custom config
       working-directory: ./openwrt
       run: |
-        curl -Lo .config https://raw.githubusercontent.com/${{ github.repository }}/main/.config
+        curl -Lo .config https://raw.githubusercontent.com/leeyan6884/immortalwrt/refs/heads/master/.config
         make defconfig
 
     - name: 🔽 Download source

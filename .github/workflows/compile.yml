@@ -53,11 +53,13 @@ jobs:
         curl -Lo .config https://raw.githubusercontent.com/${{ github.repository }}/main/.config
         make defconfig
 
-    - name: 🧱 Compile firmware
+    - name: Download source
       working-directory: ./openwrt
-      run: |
-        make download -j$(nproc) || make download -j1 V=s
-        make -j$(nproc) V=s
+      run: make -j$(nproc) download
+
+    - name: Build
+      working-directory: ./openwrt
+      run: make -j$(nproc) V=s
 
     - name: 📦 Pack firmware
       working-directory: ./openwrt

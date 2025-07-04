@@ -73,4 +73,22 @@ EOF
     - name: 📦 Pack firmware
       working-directory: ./openwrt
       run: |
-        m
+        mkdir -p ../firmware
+        find bin/targets -type f \( -name "*.img" -o -name "*.bin" -o -name "*.tar" \) -exec cp -v {} ../firmware/ \;
+
+    - name: ☁️ Upload firmware to artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: OpenWrt-x86_64
+        path: firmware/
+
+    - name: 📤 Upload to GitHub Releases
+      uses: ncipollo/release-action@v1
+      with:
+        tag: "firmware-${{ github.run_number }}"
+        name: "OpenWrt x86_64 Build ${{ github.run_number }}"
+        body: |
+          自动编译固件：x86_64 UEFI + BIOS 双启  
+          包含插件：Passwall、OpenClash、MosDNS、Docker、Argon 主题  
+          构建时间：${{ github.event.head_commit.timestamp }}
+        artifacts: "firmware"

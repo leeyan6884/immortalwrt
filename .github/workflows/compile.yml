@@ -29,14 +29,12 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git openwrt
         cd openwrt
-        cat > feeds.conf.default <<EOF
-src-git packages https://github.com/immortalwrt/packages
-src-git luci https://github.com/immortalwrt/luci
-src-git routing https://github.com/openwrt-routing/packages
-src-git telephony https://git.openwrt.org/feed/telephony.git
-src-git kenzo https://github.com/kenzok8/openwrt-packages
-src-git small https://github.com/kenzok8/small
-EOF
+
+    - name: ➕ Add custom feed sources
+      working-directory: ./openwrt
+      run: |
+        echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> feeds.conf.default
+        echo 'src-git small https://github.com/kenzok8/small' >> feeds.conf.default
 
     - name: 📦 Cache downloads
       uses: actions/cache@v3

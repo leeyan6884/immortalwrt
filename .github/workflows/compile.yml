@@ -59,7 +59,7 @@ jobs:
 
     - name: Build
       working-directory: ./openwrt
-      run: make -j$(nproc) V=s
+      run: make -j$(nproc)
 
     - name: 📦 Pack firmware
       working-directory: ./openwrt

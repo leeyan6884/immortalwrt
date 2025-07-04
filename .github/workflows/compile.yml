@@ -1,4 +1,4 @@
-name: Build OpenWrt x86_64
+name: Build Immortalwrt
 
 on:
   workflow_dispatch:

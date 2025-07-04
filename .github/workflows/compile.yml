@@ -55,11 +55,13 @@ jobs:
 
     - name: Download source
       working-directory: ./openwrt
-      run: make -j$(nproc) download
+      run: 
+        make -j$(nproc) download
 
     - name: Build
       working-directory: ./openwrt
-      run: make -j$(nproc)
+      run: 
+        make -j$(nproc)
 
     - name: 📦 Pack firmware
       working-directory: ./openwrt

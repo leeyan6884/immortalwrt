@@ -30,13 +30,13 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git openwrt
         cd openwrt
         cat > feeds.conf.default <<EOF
-        src-git packages https://github.com/immortalwrt/packages
-        src-git luci https://github.com/immortalwrt/luci
-        src-git routing https://github.com/openwrt-routing/packages
-        src-git telephony https://git.openwrt.org/feed/telephony.git
-        src-git kenzo https://github.com/kenzok8/openwrt-packages
-        src-git small https://github.com/kenzok8/small
-        EOF
+src-git packages https://github.com/immortalwrt/packages
+src-git luci https://github.com/immortalwrt/luci
+src-git routing https://github.com/openwrt-routing/packages
+src-git telephony https://git.openwrt.org/feed/telephony.git
+src-git kenzo https://github.com/kenzok8/openwrt-packages
+src-git small https://github.com/kenzok8/small
+EOF
 
     - name: Cache downloads
       uses: actions/cache@v3
@@ -88,7 +88,4 @@ jobs:
         tag: "firmware-${{ github.run_number }}"
         name: "OpenWrt x86_64 Build ${{ github.run_number }}"
         body: |
-          自动编译固件：x86_64 UEFI + BIOS 双启  
-          包含插件：Passwall、OpenClash、MosDNS、Docker、Argon 主题  
-          构建时间：${{ github.event.head_commit.timestamp }}
-        artifacts: "firmware"
+          自动编译固件：x86_64_

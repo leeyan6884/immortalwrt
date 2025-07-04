@@ -30,13 +30,13 @@ jobs:
         git clone --depth=1 https://github.com/immortalwrt/immortalwrt.git openwrt
         cd openwrt
         cat > feeds.conf.default <<EOF
-src-git packages https://github.com/immortalwrt/packages
-src-git luci https://github.com/immortalwrt/luci
-src-git routing https://github.com/openwrt-routing/packages
-src-git telephony https://git.openwrt.org/feed/telephony.git
-src-git kenzo https://github.com/kenzok8/openwrt-packages
-src-git small https://github.com/kenzok8/small
-EOF
+        src-git packages https://github.com/immortalwrt/packages
+        src-git luci https://github.com/immortalwrt/luci
+        src-git routing https://github.com/openwrt-routing/packages
+        src-git telephony https://git.openwrt.org/feed/telephony.git
+        src-git kenzo https://github.com/kenzok8/openwrt-packages
+        src-git small https://github.com/kenzok8/small
+        EOF
 
     - name: Cache downloads
       uses: actions/cache@v3

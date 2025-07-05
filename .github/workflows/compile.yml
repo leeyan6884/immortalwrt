@@ -9,15 +9,13 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
     steps:
     - name: ⏬ Checkout
       uses: actions/checkout@v4
-
-    - name: 🕒 Set up timezone
-      run: sudo timedatectl set-timezone "$TZ"
-
-    - name: ⚙️ Install dependencies
+      with:
+        fetch-depth: 0
+    
+    - name: Install dependencies
       run: |
         sudo apt update
         sudo apt install -y build-essential ccache ecj fastjar file clang cmake g++ gawk \

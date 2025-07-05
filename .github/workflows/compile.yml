@@ -74,11 +74,11 @@ jobs:
         
     - name: 🔽 make clean
       working-directory: ./openwrt
-      run: make download -j$(nproc)
+      run: make clean
 
     - name: 🔽 Download source
       working-directory: ./openwrt
-      run: make clean
+      run: make download -j$(nproc)
 
     - name: 🏗️ Build
       working-directory: ./openwrt
